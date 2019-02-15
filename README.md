@@ -1,4 +1,22 @@
-[![Gated by Zuul](https://zuul-ci.org/gated.svg)](https://ansible.softwarefactory-project.io/zuul/status)
+Changes from information listed below
+-------------------------------------
+In this repository, I've made a few adjustments.
+1. Integration of lastpass-cli to enable the Ansible lastpass lookup plugin
+2. Setting Nginx to listen on ports 80 and 443 (with mounted ssl certificates)
+
+To use these features, you need to set the following variables in `installer/inventory.yml`
+* `host_port=80` - HTTP Port for Nginx
+* `ssl_host_port=443` - HTTPS Port for Nginx
+* `lastpass_username=` - Lastpass username/email address
+* `lastpass_password=` - Lastpass password
+* `ssl_cert_local_dir=` - Local directory on the system running AWX where your SSL Certificate and key reside
+* `ssl_cert_file=` - Name of the SSL Certificate file (in Nginx format) - this is not the full path, just the file name
+* `ssl_key_file=` - Name of the SSL Key file (in Nginx format) - this is not the full path, just the file name
+
+
+
+Default AWX Readme
+------------------
 
 <img src="https://raw.githubusercontent.com/ansible/awx-logos/master/awx/ui/client/assets/logo-login.svg?sanitize=true" width=200 alt="AWX" />
 
@@ -37,10 +55,9 @@ Get Involved
 We welcome your feedback and ideas. Here's how to reach us with feedback and questions:
 
 - Join the `#ansible-awx` channel on irc.freenode.net
-- Join the [mailing list](https://groups.google.com/forum/#!forum/awx-project) 
+- Join the [mailing list](https://groups.google.com/forum/#!forum/awx-project)
 
 License
 -------
 
 [Apache v2](./LICENSE.md)
-
