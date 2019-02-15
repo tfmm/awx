@@ -11,4 +11,9 @@ ANSIBLE_REMOTE_TEMP=/tmp ANSIBLE_LOCAL_TEMP=/tmp ansible -i "127.0.0.1," -c loca
 ANSIBLE_REMOTE_TEMP=/tmp ANSIBLE_LOCAL_TEMP=/tmp ansible -i "127.0.0.1," -c local -v -m postgresql_db --become-user $DATABASE_USER -a "name=$DATABASE_NAME owner=$DATABASE_USER login_user=$DATABASE_USER login_host=$DATABASE_HOST login_password=$DATABASE_PASSWORD port=$DATABASE_PORT" all
 
 awx-manage collectstatic --noinput --clear
+
+echo "${LPASS_PASSWORD}" | lpass login --trust ${LPASS_USERNAME}
+
+ln -sf /root/.lpass /var/lib/awx/
+
 supervisord -c /supervisor.conf

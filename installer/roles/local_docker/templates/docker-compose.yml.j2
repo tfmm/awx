@@ -11,12 +11,16 @@ services:
       - postgres
       {% endif %}
     ports:
-      - "{{ host_port }}:8052"
+      - "{{ host_port }}:80"
+      - "{{ ssl_host_port }}:443"
     hostname: {{ awx_web_hostname }}
     user: root
     restart: unless-stopped
-    {% if (project_data_dir is defined) or (ca_trust_dir is defined) %}
+    {% if (project_data_dir is defined) or (ca_trust_dir is defined) or (ssl_cert_local_dir is defined) %}
     volumes:
+    {% endif %}
+    {% if ssl_cert_local_dir is defined %}
+      - "{{ ssl_cert_local_dir +':/var/lib/awx-ssl:rw' }}"
     {% endif %}
     {% if project_data_dir is defined %}
       - "{{ project_data_dir +':/var/lib/awx/projects:rw' }}"
